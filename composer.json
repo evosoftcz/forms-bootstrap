@@ -1,5 +1,5 @@
 {
-  "name": "contributte/forms-bootstrap",
+  "name": "evosoftcz/forms-bootstrap",
   "type": "library",
   "description": "Nette extension for Bootstrap forms",
   "homepage": "https://github.com/contributte/forms-bootstrap",
@@ -17,8 +17,8 @@
     }
   ],
   "require": {
-    "php": ">=7.2",
-    "nette/forms": "3.1.11",
+    "php": ">=8.2",
+    "nette/forms": "^3.1.11",
     "nette/application": "^3.0"
   },
   "require-dev": {
