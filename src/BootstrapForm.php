@@ -6,6 +6,7 @@ use Contributte\FormsBootstrap\Enums\BootstrapVersion;
 use Contributte\FormsBootstrap\Traits\AddRowTrait;
 use Contributte\FormsBootstrap\Traits\BootstrapContainerTrait;
 use Nette\Application\UI\Form;
+use Nette\ComponentModel\IComponent;
 use Nette\ComponentModel\IContainer;
 use Nette\Forms\FormRenderer;
 use Nette\InvalidArgumentException;
@@ -26,25 +27,19 @@ class BootstrapForm extends Form
 	use AddRowTrait;
 
 	/** @var string Class to be added if this is ajax. Defaults to 'ajax' */
-	public $ajaxClass = 'ajax';
+	public string $ajaxClass = 'ajax';
 
-	/** @var Html */
-	protected $elementPrototype;
+	protected Html $elementPrototype;
 
-	/** @var bool */
-	private $isAjax = true;
+	private bool $isAjax = true;
 
-	/** @var bool */
-	private $showValidation = false;
+	private bool $showValidation = false;
 
-	/** @var bool */
-	private $autoShowValidation = true;
+	private bool $autoShowValidation = true;
 
-	/** @var bool */
-	public static $allwaysUseNullable = false;
+	public static bool $allwaysUseNullable = false;
 
-	/** @var int */
-	private static $bootstrapVersion = BootstrapVersion::V4;
+	private static int $bootstrapVersion = BootstrapVersion::V5;
 
 	/**
 	 * @param IContainer|null $container
@@ -190,5 +185,4 @@ class BootstrapForm extends Form
 
 		return $this;
 	}
-
 }
