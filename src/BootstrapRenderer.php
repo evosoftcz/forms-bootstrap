@@ -183,7 +183,7 @@ class BootstrapRenderer implements FormRenderer
 
 			Cnf::PAIR  => [
 				Cnf::ELEMENT_NAME => 'div',
-				Cnf::CLASS_SET    => BootstrapForm::getBootstrapVersion() === BootstrapVersion::V5 ? 'mb-3 position-relative' : 'form-group',
+				Cnf::CLASS_SET    => BootstrapForm::getBootstrapVersion() === BootstrapVersion::V5 ? 'form-group mb-3 position-relative' : 'form-group',
 			],
 			Cnf::LABEL => [
 				Cnf::ELEMENT_NAME => 'label',
