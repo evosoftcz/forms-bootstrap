@@ -12,6 +12,7 @@ use Contributte\FormsBootstrap\Inputs\DateTimeInput;
 use Contributte\FormsBootstrap\Inputs\MultiselectInput;
 use Contributte\FormsBootstrap\Inputs\RadioInput;
 use Contributte\FormsBootstrap\Inputs\SelectInput;
+use Contributte\FormsBootstrap\Inputs\SelectizeInput;
 use Contributte\FormsBootstrap\Inputs\SubmitButtonInput;
 use Contributte\FormsBootstrap\Inputs\TextAreaInput;
 use Contributte\FormsBootstrap\Inputs\TextInput;
@@ -31,6 +32,7 @@ use Nette\Forms\Controls\TextInput as NetteTextInput;
 use Nette\Forms\Controls\UploadControl;
 use Nette\Forms\Form;
 use Nette\Utils\Html;
+use Selectize\Form\Control\Selectize;
 
 /**
  * Trait BootstrapContainerTrait.
@@ -214,6 +216,20 @@ trait BootstrapContainerTrait
 			$comp->setHtmlAttribute('size', $size);
 		}
 
+		$this->addComponent($comp, $name);
+
+		return $comp;
+	}
+
+
+	/**
+	 * @param string|Html|null $label
+	 * @param array<string|int, array<string|int, string>|string> $items
+	 * @return SelectizeInput
+	 */
+	public function addSelectize(string $name, $label = null, ?array $items = null, array $selectize_setting = []): SelectizeInput
+	{
+		$comp = new SelectizeInput($label, $items, $selectize_setting);
 		$this->addComponent($comp, $name);
 
 		return $comp;
