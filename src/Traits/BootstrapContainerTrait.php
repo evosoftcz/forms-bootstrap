@@ -243,6 +243,7 @@ trait BootstrapContainerTrait
 	{
 		$comp = new SubmitButtonInput($caption);
 		$comp->setBtnClass('btn-primary');
+        $comp->renderAsButton(true);
 		$this->addComponent($comp, $name);
 
 		return $comp;
