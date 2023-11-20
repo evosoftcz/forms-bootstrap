@@ -23,6 +23,7 @@ use Nette\Forms\Controls\BaseControl;
 use Nette\Forms\Controls\Button;
 use Nette\Forms\Controls\Checkbox;
 use Nette\Forms\Controls\CheckboxList;
+use Nette\Forms\Controls\DateTimeControl;
 use Nette\Forms\Controls\MultiSelectBox;
 use Nette\Forms\Controls\RadioList;
 use Nette\Forms\Controls\SelectBox;
@@ -104,9 +105,9 @@ trait BootstrapContainerTrait
 	/**
 	 * Adds a datetime input.
 	 */
-	public function addDate(string $name, string $label): DateInput
+	public function addDate(string $name, $label = null): DateTimeControl
 	{
-		$comp = new DateInput($label, null);
+		$comp = new DateTimeControl($label, null);
 		$comp->setNullable(BootstrapForm::$allwaysUseNullable);
 		$this->addComponent($comp, $name);
 
@@ -117,9 +118,9 @@ trait BootstrapContainerTrait
 	 * @param string|Html|null $label
 	 * Adds a datetime input.
 	 */
-	public function addDateTime(string $name, $label): DateTimeInput
+	public function addDateTime(string $name, $label = null, bool $withSeconds = false): DateTimeControl
 	{
-		$comp = new DateTimeInput($label);
+		$comp = new DateTimeControl($label);
 		$comp->setNullable(BootstrapForm::$allwaysUseNullable);
 		$this->addComponent($comp, $name);
 

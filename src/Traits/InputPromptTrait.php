@@ -18,7 +18,7 @@ trait InputPromptTrait
 	 * @param string|null $prompt
 	 * @return static
 	 */
-	public function setPrompt(?string $prompt): static
+	public function setPrompt($prompt): static
 	{
 		if (empty($prompt)) {
 			return $this;
