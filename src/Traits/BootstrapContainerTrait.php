@@ -12,6 +12,7 @@ use Contributte\FormsBootstrap\Inputs\DateTimeInput;
 use Contributte\FormsBootstrap\Inputs\MultiselectInput;
 use Contributte\FormsBootstrap\Inputs\RadioInput;
 use Contributte\FormsBootstrap\Inputs\SelectInput;
+use Contributte\FormsBootstrap\Inputs\SelectizeInput;
 use Contributte\FormsBootstrap\Inputs\SubmitButtonInput;
 use Contributte\FormsBootstrap\Inputs\TextAreaInput;
 use Contributte\FormsBootstrap\Inputs\TextInput;
@@ -22,6 +23,7 @@ use Nette\Forms\Controls\BaseControl;
 use Nette\Forms\Controls\Button;
 use Nette\Forms\Controls\Checkbox;
 use Nette\Forms\Controls\CheckboxList;
+use Nette\Forms\Controls\DateTimeControl;
 use Nette\Forms\Controls\MultiSelectBox;
 use Nette\Forms\Controls\RadioList;
 use Nette\Forms\Controls\SelectBox;
@@ -31,6 +33,7 @@ use Nette\Forms\Controls\TextInput as NetteTextInput;
 use Nette\Forms\Controls\UploadControl;
 use Nette\Forms\Form;
 use Nette\Utils\Html;
+use Selectize\Form\Control\Selectize;
 
 /**
  * Trait BootstrapContainerTrait.
@@ -102,9 +105,9 @@ trait BootstrapContainerTrait
 	/**
 	 * Adds a datetime input.
 	 */
-	public function addDate(string $name, string $label): DateInput
+	public function addDate(string $name, $label = null): DateTimeControl
 	{
-		$comp = new DateInput($label, null);
+		$comp = new DateTimeControl($label, null);
 		$comp->setNullable(BootstrapForm::$allwaysUseNullable);
 		$this->addComponent($comp, $name);
 
@@ -115,9 +118,9 @@ trait BootstrapContainerTrait
 	 * @param string|Html|null $label
 	 * Adds a datetime input.
 	 */
-	public function addDateTime(string $name, $label): DateTimeInput
+	public function addDateTime(string $name, $label = null, bool $withSeconds = false): DateTimeControl
 	{
-		$comp = new DateTimeInput($label);
+		$comp = new DateTimeControl($label);
 		$comp->setNullable(BootstrapForm::$allwaysUseNullable);
 		$this->addComponent($comp, $name);
 
@@ -219,6 +222,20 @@ trait BootstrapContainerTrait
 		return $comp;
 	}
 
+
+	/**
+	 * @param string|Html|null $label
+	 * @param array<string|int, array<string|int, string>|string> $items
+	 * @return SelectizeInput
+	 */
+	public function addSelectize(string $name, $label = null, ?array $items = null, array $selectize_setting = []): SelectizeInput
+	{
+		$comp = new SelectizeInput($label, $items, $selectize_setting);
+		$this->addComponent($comp, $name);
+
+		return $comp;
+	}
+
 	/**
 	 * @param string|Html|null $caption
 	 * @return SubmitButtonInput
@@ -227,6 +244,7 @@ trait BootstrapContainerTrait
 	{
 		$comp = new SubmitButtonInput($caption);
 		$comp->setBtnClass('btn-primary');
+        $comp->renderAsButton(true);
 		$this->addComponent($comp, $name);
 
 		return $comp;
