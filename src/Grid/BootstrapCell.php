@@ -8,6 +8,7 @@ use Contributte\FormsBootstrap\Traits\BootstrapContainerTrait;
 use Nette\ComponentModel\IComponent;
 use Nette\Forms\Control;
 use Nette\Forms\ControlGroup;
+use Nette\Forms\Controls\BaseControl;
 use Nette\SmartObject;
 use Nette\Utils\Html;
 
@@ -43,7 +44,7 @@ class BootstrapCell
 	/** @var int|null */
 	private $numOfColumns;
 
-	/** @var Control[]|null */
+	/** @var BaseControl[] */
 	private $childControls = [];
 
 	/** @var BootstrapRow */
@@ -95,7 +96,7 @@ class BootstrapCell
 		$element = $renderer->configElem(RendererConfig::GRID_CELL, $element);
 		$element->class[] = $this->createClass();
 
-		foreach ($this->childControls as $childControl) {
+		foreach ($this->childControls as $childControl) { //@phpstan-ignore-line phpstan bug
 			$pairHtml = $renderer->renderPair($childControl);
 			$element->addHtml($pairHtml);
 		}
@@ -112,7 +113,7 @@ class BootstrapCell
 	{
 		/** @noinspection PhpInternalEntityUsedInspection */
 		$this->row->addComponent($component, $name, $insertBefore);
-		$this->childControls[] = $component;
+		$this->childControls[] = $component; //@phpstan-ignore-line phpstan bug
 	}
 
 	public function getCurrentGroup(): ?ControlGroup
@@ -123,6 +124,16 @@ class BootstrapCell
 	public function setCurrentGroup(?ControlGroup $currentGroup): self
 	{
 		$this->currentGroup = $currentGroup;
+
+		return $this;
+	}
+
+	/**
+	 * @return static
+	 */
+	public function addHtmlClass(string $class)
+	{
+		$this->elementPrototype->class[] = $class;
 
 		return $this;
 	}
@@ -143,16 +154,6 @@ class BootstrapCell
 		}
 
 		return $this->row->gridBreakPoint !== null ? 'col-' . $this->row->gridBreakPoint . '-' . $this->numOfColumns : 'col-' . $this->numOfColumns;
-	}
-
-	/**
-	 * @return static
-	 */
-	public function addHtmlClass(string $class)
-	{
-		$this->elementPrototype->class[] = $class;
-
-		return $this;
 	}
 
 }

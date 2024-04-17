@@ -159,40 +159,40 @@ class BootstrapRenderer implements FormRenderer
 	public function getConfig(): array
 	{
 		return [
-			Cnf::FORM       => [],
-			Cnf::GROUP      => [
+			Cnf::FORM => [],
+			Cnf::GROUP => [
 				Cnf::ELEMENT_NAME => 'fieldset',
 			],
 			Cnf::GROUP_LABEL => [
 				Cnf::ELEMENT_NAME => 'legend',
 			],
 
-			Cnf::GRID_ROW  => [
+			Cnf::GRID_ROW => [
 				Cnf::ELEMENT_NAME => 'div',
-				Cnf::CLASS_ADD    => BootstrapForm::getBootstrapVersion() === BootstrapVersion::V5 ? 'row' : 'form-row',
+				Cnf::CLASS_ADD => BootstrapForm::getBootstrapVersion() === BootstrapVersion::V5 ? 'row' : 'form-row',
 			],
 			Cnf::GRID_CELL => [
 				Cnf::ELEMENT_NAME => 'div',
 			],
 
 			Cnf::FORM_OWN_ERRORS => [],
-			Cnf::FORM_OWN_ERROR  => [
+			Cnf::FORM_OWN_ERROR => [
 				Cnf::ELEMENT_NAME => 'div',
-				Cnf::CLASS_SET    => ['alert', 'alert-danger'],
+				Cnf::CLASS_SET => ['alert', 'alert-danger'],
 			],
 
-			Cnf::PAIR  => [
+			Cnf::PAIR => [
 				Cnf::ELEMENT_NAME => 'div',
 				Cnf::CLASS_SET    => BootstrapForm::getBootstrapVersion() === BootstrapVersion::V5 ? 'form-group mb-3 position-relative' : 'form-group',
 			],
 			Cnf::LABEL => [
 				Cnf::ELEMENT_NAME => 'label',
-				Cnf::CLASS_SET    => BootstrapForm::getBootstrapVersion() === BootstrapVersion::V5 ? 'form-label' : null,
+				Cnf::CLASS_SET => BootstrapForm::getBootstrapVersion() === BootstrapVersion::V5 ? 'form-label' : null,
 			],
 
-			Cnf::INPUT        => [],
+			Cnf::INPUT => [],
 			// inputs which are normally inline elements (after bootstrap classes are applied)
-			Cnf::INPUT_VALID   => [
+			Cnf::INPUT_VALID => [
 				Cnf::CLASS_ADD => 'is-valid',
 			],
 			Cnf::INPUT_INVALID => [
@@ -201,13 +201,13 @@ class BootstrapRenderer implements FormRenderer
 
 			Cnf::DESCRIPTION => [
 				Cnf::ELEMENT_NAME => 'small',
-				Cnf::CLASS_SET    => ['form-text', 'text-muted'],
+				Cnf::CLASS_SET => ['form-text', 'text-muted'],
 			],
 
-			Cnf::FEEDBACK        => [
+			Cnf::FEEDBACK => [
 				Cnf::ELEMENT_NAME => 'div',
 			],
-			Cnf::FEEDBACK_VALID   => [
+			Cnf::FEEDBACK_VALID => [
 				Cnf::CLASS_ADD => 'valid-feedback',
 			],
 			Cnf::FEEDBACK_INVALID => [
@@ -215,7 +215,7 @@ class BootstrapRenderer implements FormRenderer
 			],
 
 			// empty wrapper,  but it gets utilized in side-by side and inline mode
-			Cnf::NON_LABEL        => [
+			Cnf::NON_LABEL => [
 				Cnf::ELEMENT_NAME => null,
 			],
 		];
@@ -237,8 +237,8 @@ class BootstrapRenderer implements FormRenderer
 		$labelColClass .= ' col-form-label';
 
 		return [
-			RenderMode::INLINE         => [
-				Cnf::FORM     => [
+			RenderMode::INLINE => [
+				Cnf::FORM => [
 					Cnf::CLASS_ADD => 'form-inline',
 				],
 				Cnf::NON_LABEL => [
@@ -246,18 +246,18 @@ class BootstrapRenderer implements FormRenderer
 				],
 			],
 			RenderMode::SIDE_BY_SIDE_MODE => [
-				Cnf::PAIR     => [
+				Cnf::PAIR => [
 					Cnf::CLASS_ADD => 'row',
 				],
-				Cnf::LABEL    => [
+				Cnf::LABEL => [
 					Cnf::CLASS_ADD => $labelColClass,
 				],
 				Cnf::NON_LABEL => [
 					Cnf::ELEMENT_NAME => 'div',
-					Cnf::CLASS_SET    => $nonLabelColClass,
+					Cnf::CLASS_SET => $nonLabelColClass,
 				],
 			],
-			RenderMode::VERTICAL_MODE   => [],
+			RenderMode::VERTICAL_MODE => [],
 		];
 	}
 
@@ -375,7 +375,7 @@ class BootstrapRenderer implements FormRenderer
 
 			//region getting container
 
-			$container = $group->getOption(RendererOptions::CONTAINER, null);
+			$container = $group->getOption(RendererOptions::CONTAINER);
 			if (is_string($container)) {
 				$container = $this->configElem(Cnf::GROUP, Html::el($container));
 			} elseif ($container instanceof Html) {
@@ -424,9 +424,7 @@ class BootstrapRenderer implements FormRenderer
 			$out->addHtml($formControls);
 		}
 
-		if (!empty($groups)) {
-			$out->addHtml($groups);
-		}
+		$out->addHtml($groups);
 
 		return (string) $out;
 	}
@@ -464,7 +462,7 @@ class BootstrapRenderer implements FormRenderer
 
 		// note that these are NOT form groups, these are groups specified to group
 		foreach ($parent->getControls() as $control) {
-			if ($control->getOption(RendererOptions::_RENDERED, false)) {
+			if ($control->getOption(RendererOptions::_RENDERED)) {
 				continue;
 			}
 
@@ -546,9 +544,7 @@ class BootstrapRenderer implements FormRenderer
 		$pairHtml->id = $control->getOption(RendererOptions::ID);
 
 		$labelHtml = $this->renderLabel($control);
-		if (!empty($labelHtml)) {
-			$pairHtml->addHtml($labelHtml);
-		}
+		$pairHtml->addHtml($labelHtml);
 
 		$nonLabel = $this->getElem(Cnf::NON_LABEL);
 
