@@ -20,7 +20,6 @@ use Nette\Utils\Html;
  *
  * @property string               $gridBreakPoint   Bootstrap breakpoint - usually xs, sm, md, lg. sm by
  *           default. Use NULL for no breakpoint.
- * @property-read string[]        $ownedNames       list of names of components which were added to this row
  * @property-read BootstrapCell[] $cells            cells in this row
  * @property-read Html            $elementPrototype the Html div that will be rendered. You may define
  *                additional properties.
@@ -33,18 +32,18 @@ class BootstrapRow implements IComponent, Control
 	use FakeControlTrait;
 
 	/**
-	 * Global name counter
-	 *
-	 * @var int
-	 */
-	private static $uidCounter = 0;
-
-	/**
 	 * Number of columns in Bootstrap grid. Default is 12, but it can be customized.
 	 *
 	 * @var int
 	 */
 	public $numOfColumns = 12;
+
+	/**
+	 * Global name counter
+	 *
+	 * @var int
+	 */
+	private static $uidCounter = 0;
 
 	/** @var string $name */
 	private $name;
@@ -188,7 +187,7 @@ class BootstrapRow implements IComponent, Control
 	 * @param Container|NULL $parent
 	 * @param null $name ignored
 	 */
-	public function setParent(?IContainer $parent = null, ?string $name = null): IComponent
+	public function setParent(?IContainer $parent = null, ?string $name = null): static
 	{
 		$this->container = $parent;
 
@@ -198,12 +197,11 @@ class BootstrapRow implements IComponent, Control
 	/**
 	 * Gets previously set option
 	 *
-	 * @param mixed|null $default
 	 * @return mixed|null
 	 */
-	public function getOption(string $option, $default = null)
+	public function getOption(string $option)
 	{
-		return $this->options[$option] ?? $default;
+		return $this->options[$option];
 	}
 
 	/**
@@ -234,6 +232,16 @@ class BootstrapRow implements IComponent, Control
 	public function setOption(string $option, $value): void
 	{
 		$this->options[$option] = $value;
+	}
+
+	/**
+	 * List of names of components which were added to this row
+	 *
+	 * @return string[]
+	 */
+	public function getOwnedNames(): array
+	{
+		return $this->ownedNames;
 	}
 
 }

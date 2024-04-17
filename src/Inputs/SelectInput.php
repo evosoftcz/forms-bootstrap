@@ -10,10 +10,6 @@ use Contributte\FormsBootstrap\Traits\StandardValidationTrait;
 use Nette\Forms\Controls\SelectBox;
 use Nette\Utils\Html;
 
-/**
- * Class SelectInput.
- * Single select.
- */
 class SelectInput extends SelectBox implements IValidationInput
 {
 
@@ -28,6 +24,7 @@ class SelectInput extends SelectBox implements IValidationInput
 	public function __construct($label = null, ?array $items = null)
 	{
 		parent::__construct($label);
+
 		if ($items !== null) {
 			$this->setItems($items);
 		}
@@ -41,7 +38,7 @@ class SelectInput extends SelectBox implements IValidationInput
 		$select = parent::getControl();
 
 		$select->attrs += [
-			'class'    => [BootstrapForm::getBootstrapVersion() === BootstrapVersion::V5 ? 'form-select' : 'custom-select'],
+			'class' => [BootstrapForm::getBootstrapVersion() === BootstrapVersion::V5 ? 'form-select' : 'custom-select'],
 			'disabled' => $this->isControlDisabled(),
 		];
 
