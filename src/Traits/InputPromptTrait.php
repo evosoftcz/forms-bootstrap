@@ -14,11 +14,8 @@ trait InputPromptTrait
 
 	/**
 	 * Sets the first unselectable item on list. Its value is null.
-	 *
-	 * @param string|null $prompt
-	 * @return static
 	 */
-	public function setPrompt($prompt): static
+	public function setPrompt(string|\Stringable|false $prompt): static
 	{
 		if (empty($prompt)) {
 			return $this;
