@@ -97,6 +97,11 @@ class BootstrapCell
         if ($element->class === null) {
             $element->class = '';
         }
+
+        if (is_array($element->class)) {
+            $element->class = implode(' ', $element->class);
+        }
+
         $element->class .= ' ' . $this->createClass();
 
 		foreach ($this->childControls as $childControl) { //@phpstan-ignore-line phpstan bug
