@@ -182,13 +182,15 @@ trait BootstrapContainerTrait
         return $comp;
     }
 
-	/**
-	 * @param Html|string|null $label
-	 * @return TextInput
-	 */
-	public function addEmail(string $name, $label = null): NetteTextInput
+    /**
+     * @param string $name
+     * @param Html|string|null $label
+     * @param int    $maxLength
+     * @return TextInput
+     */
+	public function addEmail(string $name, $label = null, int $maxLength = 255): NetteTextInput
 	{
-		return $this->addText($name, $label)
+		return $this->addText($name, $label, $maxLength)
 			->setNullable(BootstrapForm::$allwaysUseNullable)
 			->addRule(Form::Email);
 	}
