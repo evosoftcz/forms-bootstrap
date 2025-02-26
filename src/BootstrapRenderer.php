@@ -211,7 +211,7 @@ class BootstrapRenderer implements FormRenderer
 				Cnf::CLASS_ADD => 'valid-feedback',
 			],
 			Cnf::FEEDBACK_INVALID => [
-				Cnf::CLASS_ADD => 'invalid-feedback',
+				Cnf::CLASS_ADD => 'invalid-tooltip',
 			],
 
 			// empty wrapper,  but it gets utilized in side-by side and inline mode
